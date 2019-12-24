@@ -1,0 +1,31 @@
+.btn1{
+    -fx-background-image: url("home.png");
+    -fx-background-size: cover;
+    -fx-border-color: #2593E5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+.btn2{
+    -fx-background-image: url("stat.png");
+    -fx-background-size: cover;
+    -fx-border-color: #2593E5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+.btn3{
+    -fx-background-image: url("drug.png");
+    -fx-background-size: cover;
+    -fx-border-color: #2593E5;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+}
+.btn4{
+    -fx-background-radius: 50%;
+    -fx-background-image:url("settings.png");
+    -fx-background-size: cover;
+    -fx-border-radius: 50%;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px;
+
+}
+

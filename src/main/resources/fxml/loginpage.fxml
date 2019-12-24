@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="314.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uz.test.controller.LoginController">
+   <children>
+      <Pane prefHeight="83.0" prefWidth="314.0" style="-fx-background-color: #63ff4b;">
+         <children>
+            <Label layoutX="94.0" layoutY="23.0" prefHeight="37.0" prefWidth="127.0" style="-fx-text-fill: black; -fx-font-weight: bolder;" text="Tizimga kirish">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <JFXTextField fx:id="login" focusColor="#10131e" labelFloat="true" prefHeight="35.0" prefWidth="274.0" promptText="Login" unFocusColor="#141111">
+         <VBox.margin>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="25.0" />
+         </VBox.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXTextField>
+      <JFXPasswordField fx:id="parol" focusColor="#1a1f2c" labelFloat="true" promptText="Parol" unFocusColor="#1e1818">
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="15.0" />
+         </VBox.margin>
+         <font>
+            <Font size="15.0" />
+         </font>
+      </JFXPasswordField>
+      <HBox alignment="TOP_RIGHT" prefHeight="38.0" prefWidth="314.0">
+         <children>
+            <JFXButton fx:id="signin" onAction="#kirish" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #63ff4b;" text="Kirish">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="20.0" top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </HBox>
+   </children>
+</VBox>
