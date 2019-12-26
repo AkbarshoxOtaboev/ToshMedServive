@@ -26,20 +26,21 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         company.setOnMouseClicked(mouseEvent -> {
-            loadStage("/fxml/drug.fxml");
+            loadStage("/fxml/company.fxml", "Ko`rxonalar`");
 
         });
         drug.setOnMouseClicked(mouseEvent -> {
-            loadStage("/fxml/drug.fxml");
+            loadStage("/fxml/drug.fxml","Dorilar bo`limi");
         });
 
 
     }
-    private void loadStage(String fxml){
+    private void loadStage(String fxml, String scenaName){
         try{
             Parent root = FXMLLoader.load(getClass().getResource(fxml));
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle(scenaName);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
@@ -53,6 +54,7 @@ public class DashboardController implements Initializable {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/statistika.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
+            stage.setTitle("Statistika");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
 
