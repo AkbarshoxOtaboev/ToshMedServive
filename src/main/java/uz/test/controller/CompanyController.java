@@ -1,6 +1,7 @@
 package uz.test.controller;
 
 import com.jfoenix.controls.JFXTextField;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -8,7 +9,6 @@ import javafx.scene.control.TableView;
 import uz.test.model.Company;
 import uz.test.repository.CompanyRepository;
 
-import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -39,7 +39,7 @@ public class CompanyController implements Initializable {
     }
 
     public void save(javafx.event.ActionEvent actionEvent) {
-        String companyName = inputCompanyName.getText();
+        String companyName =inputCompanyName.getText();
         Integer balans = 0;
         Company company = new Company(companyName,balans);
         companyRepository.createCompany(company);
@@ -47,4 +47,6 @@ public class CompanyController implements Initializable {
 
     public void payment(javafx.event.ActionEvent actionEvent) {
     }
+
+
 }

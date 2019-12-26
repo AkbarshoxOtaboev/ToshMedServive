@@ -23,7 +23,7 @@ public class CompanyRepository {
                 session.close();
             }
         }
-        return companies;
+        return  companies;
     }
 
     public void createCompany(Company company){

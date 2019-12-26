@@ -1,5 +1,7 @@
 package uz.test.model;
 
+import javafx.beans.property.StringProperty;
+
 import javax.persistence.*;
 
 @Entity
