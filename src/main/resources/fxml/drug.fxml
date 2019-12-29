@@ -3,17 +3,18 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="489.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uz.test.controller.DrugController">
+<AnchorPane prefHeight="489.0" prefWidth="1081.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uz.test.controller.DrugController">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="38.0" layoutY="45.0" prefHeight="489.0" prefWidth="267.0" style="-fx-background-color: #cdfed3;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
@@ -25,7 +26,7 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                     </VBox.margin>
                 </Label>
-                <JFXComboBox fx:id="companyCB" focusColor="BLACK" onAction="#fillCB" prefHeight="25.0" prefWidth="247.0" promptText="Korxonalar" unFocusColor="BLACK">
+                <JFXComboBox fx:id="companyCB" focusColor="BLACK" labelFloat="true" onAction="#fillCB" prefHeight="25.0" prefWidth="247.0" promptText="Korxonalar" unFocusColor="BLACK">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
@@ -34,18 +35,27 @@
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
                 </JFXTextField>
                 <JFXTextField fx:id="drugCount" focusColor="BLACK" labelFloat="true" promptText="Qiymati" unFocusColor="BLACK">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
                 </JFXTextField>
                 <JFXTextField fx:id="drugPrice" focusColor="BLACK" labelFloat="true" promptText="Narxi" unFocusColor="BLACK">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
                 </JFXTextField>
-            <DatePicker prefHeight="25.0" prefWidth="242.0" style="-fx-background-color: transparent;">
+            <DatePicker fx:id="date" prefHeight="25.0" prefWidth="242.0" promptText="Olingan vaqt" style="-fx-background-color: transparent;">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -84,6 +94,15 @@
                 </Label>
             </children>
         </Pane>
-      <JFXTreeTableView layoutX="295.0" layoutY="121.0" prefHeight="352.0" prefWidth="632.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="295.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="121.0" />
+      <TableView fx:id="tableDataDrug" layoutX="275.0" layoutY="111.0" prefHeight="367.0" prefWidth="788.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="280.0" AnchorPane.topAnchor="112.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="№" />
+            <TableColumn fx:id="drugNameInTable" prefWidth="222.0" text="Dori nomi" />
+            <TableColumn fx:id="drugCountInTable" prefWidth="109.0" text="Soni" />
+            <TableColumn fx:id="drugPriceInTable" prefWidth="114.0" text="Narxi" />
+            <TableColumn fx:id="generalPriceInTable" prefWidth="147.0" text="Umumiy qiymat" />
+            <TableColumn fx:id="dateWhenBuyDrug" prefWidth="120.0" text="Olingan vaqt" />
+        </columns>
+      </TableView>
     </children>
 </AnchorPane>

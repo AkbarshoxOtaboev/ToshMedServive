@@ -10,19 +10,19 @@ public class Drug {
     private Long id;
     private String drugName;
     private Integer count;
-    private Integer price;
-    private Integer generalPrice;
+    private Double price;
+    private Double generalPrice;
     private String date;
 
-    public Drug() {
-    }
-
-    public Drug(String drugName, Integer count, Integer price, Integer generalPrice, String date) {
+    public Drug(String drugName, Integer count, Double price, Double generalPrice, String date) {
         this.drugName = drugName;
         this.count = count;
         this.price = price;
         this.generalPrice = generalPrice;
         this.date = date;
+    }
+    public Drug() {
+
     }
 
     public Long getId() {
@@ -49,19 +49,19 @@ public class Drug {
         this.count = count;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
-    public Integer getGeneralPrice() {
+    public Double getGeneralPrice() {
         return generalPrice;
     }
 
-    public void setGeneralPrice(Integer generalPrice) {
+    public void setGeneralPrice(Double generalPrice) {
         this.generalPrice = generalPrice;
     }
 
