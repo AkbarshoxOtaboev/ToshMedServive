@@ -11,6 +11,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import uz.test.model.Company;
 import uz.test.model.Drug;
 import uz.test.repository.CompanyRepository;
@@ -24,7 +25,7 @@ import java.util.ResourceBundle;
 public class DrugController implements Initializable {
     private DrugRepository drugRepository = new DrugRepository();
     @FXML
-    private JFXComboBox<String> companyCB;
+    private JFXComboBox<DropDown> companyCB;
 
     @FXML
     private JFXTextField drugName;
@@ -58,11 +59,25 @@ public class DrugController implements Initializable {
     @FXML
     private TableColumn<Drug, String> dateWhenBuyDrug;
 
+    private boolean close =true;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initComboxCompanyName();
         refreshTable();
+        disable(close);
+
     }
+
+    private void refreshTable() {
+    }
+
+    private void disable(boolean close) {
+        drugName.setDisable(close);
+        drugPrice.setDisable(close);
+        drugCount.setDisable(close);
+        date.setDisable(close);
+    }
+
     private ObservableList<Drug> drugs = FXCollections.observableArrayList();
 
     private void loadTable() {
@@ -74,9 +89,9 @@ public class DrugController implements Initializable {
         dateWhenBuyDrug.setCellValueFactory(new PropertyValueFactory<>("date"));
 
     }
-    private void refreshTable(){
+    private void refreshTable(long idRefresh){
         loadTable();
-        drugs = FXCollections.observableArrayList(drugRepository.getAllDrugs());
+        drugs = FXCollections.observableArrayList(drugRepository.getDrugsByIdCompany(idRefresh));
         tableDataDrug.setItems(drugs);
 
     }
@@ -84,15 +99,19 @@ public class DrugController implements Initializable {
     private void initComboxCompanyName() {
         CompanyRepository companyRepository = new CompanyRepository();
         List<Company> companies = companyRepository.getAllCompany();
-        List<String> companyNameList =new ArrayList<>();
+        List<DropDown> companyNameList =new ArrayList<>();
         for (int i = 0; i < companies.size() ; i++) {
-            companyNameList.add(companies.get(i).getName());
+            DropDown dropDown = new DropDown();
+            dropDown.setId(companies.get(i).getId());
+            dropDown.setName(companies.get(i).getName());
+            companyNameList.add(dropDown);
         }
-        ObservableList<String> strings = FXCollections.observableArrayList(companyNameList);
+        ObservableList<DropDown> strings = FXCollections.observableArrayList();
+        for(int i = 0 ; i < companyNameList.size(); i++){
+           strings.add(companyNameList.get(i));
+        }
         companyCB.setItems(strings);
     }
-
-
 
     public void saveDrug(ActionEvent actionEvent) {
         String name = drugName.getText();
@@ -100,11 +119,22 @@ public class DrugController implements Initializable {
         Double price= Double.parseDouble(String.valueOf(drugPrice.getText()));
         Double generalPrice = 1.0*count*price;
         String dateBuy = date.getValue().toString();
-        Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy);
+        DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+        Long companyId= dropDown.getId();
+        Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
         drugRepository.saveDrug(newDrug);
-        refreshTable();
+        refreshTable(companyId);
 
     }
     public void fillCB(ActionEvent actionEvent) {
+        close = false;
+        disable(close);
+        DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+        Long companyId= dropDown.getId();
+        System.out.println(companyId);
+        loadTable();
+        drugs = FXCollections.observableArrayList(drugRepository.getDrugsByIdCompany(companyId));
+        tableDataDrug.setItems(drugs);
+
     }
 }

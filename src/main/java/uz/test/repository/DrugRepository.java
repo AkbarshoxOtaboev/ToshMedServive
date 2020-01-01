@@ -3,6 +3,7 @@ package uz.test.repository;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
 import uz.test.db.HibernateUtils;
+import uz.test.model.Company;
 import uz.test.model.Drug;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ public class DrugRepository {
             e.printStackTrace();
         }finally {
             if(session != null && session.isOpen()){
+
                 session.close();
             }
         }
@@ -78,6 +80,29 @@ public class DrugRepository {
                 session.close();
             }
         }
+    }
+
+    public List<Drug> getDrugsByIdCompany(Long company_id){
+        Session session = null;
+        Company company = null;
+        List<Drug> drugs = null;
+        try{
+            session = HibernateUtils.openSession();
+            try {
+                company = session.find(Company.class,company_id);
+                drugs = company.getGetAllDrugsByIdCompany();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if(session != null && session.isOpen()){
+                session.close();
+            }
+        }
+        return drugs;
     }
 
 }

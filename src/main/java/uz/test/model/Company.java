@@ -3,6 +3,7 @@ package uz.test.model;
 import javafx.beans.property.StringProperty;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "companies")
@@ -12,6 +13,9 @@ public class Company {
     private Long id;
     private String name;
     private Integer balans;
+
+    @OneToMany(fetch = FetchType.LAZY,mappedBy = "company_id")
+    private List<Drug> getAllDrugsByIdCompany;
 
     public Company() {
     }
@@ -43,5 +47,13 @@ public class Company {
 
     public void setBalans(Integer balans) {
         this.balans = balans;
+    }
+
+    public List<Drug> getGetAllDrugsByIdCompany() {
+        return getAllDrugsByIdCompany;
+    }
+
+    public void setGetAllDrugsByIdCompany(List<Drug> getAllDrugsByIdCompany) {
+        this.getAllDrugsByIdCompany = getAllDrugsByIdCompany;
     }
 }

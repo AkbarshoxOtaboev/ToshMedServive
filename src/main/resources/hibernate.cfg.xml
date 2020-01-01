@@ -11,9 +11,10 @@
         <property name="connection.url">jdbc:sqlite:med.db</property>
         <property name="connection.username"/>
         <property name="connection.password"/>
+<!--        <property name="connection.pool_size">10</property>-->
 
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <property name="hibernate.connection.charSet utf-8"/>
+        <property name="hibernate.connection.charSet">utf-8</property>
 
         <mapping class="uz.test.model.Admin"/>
         <mapping class="uz.test.model.Company"/>

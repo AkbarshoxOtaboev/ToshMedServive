@@ -14,6 +14,8 @@ public class Drug {
     private Double generalPrice;
     private String date;
 
+    private Long company_id;
+
     public Drug(String drugName, Integer count, Double price, Double generalPrice, String date) {
         this.drugName = drugName;
         this.count = count;
@@ -23,6 +25,15 @@ public class Drug {
     }
     public Drug() {
 
+    }
+
+    public Drug(String drugName, Integer count, Double price, Double generalPrice, String date, Long company_id) {
+        this.drugName = drugName;
+        this.count = count;
+        this.price = price;
+        this.generalPrice = generalPrice;
+        this.date = date;
+        this.company_id = company_id;
     }
 
     public Long getId() {
@@ -71,5 +82,13 @@ public class Drug {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Long getCompany_id() {
+        return company_id;
+    }
+
+    public void setCompany_id(Long company_id) {
+        this.company_id = company_id;
     }
 }

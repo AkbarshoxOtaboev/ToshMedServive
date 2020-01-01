@@ -62,6 +62,7 @@ public class CompanyRepository {
         }
         return companyById;
     }
+
     public void updateCompany(Company company){
         Session session = null;
         try{
