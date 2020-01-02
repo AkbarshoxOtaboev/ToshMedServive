@@ -14,7 +14,7 @@ public class Company {
     private String name;
     private Integer balans;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy = "company_id")
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "company_id")
     private List<Drug> getAllDrugsByIdCompany;
 
     public Company() {

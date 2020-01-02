@@ -60,16 +60,20 @@ public class DrugController implements Initializable {
     private TableColumn<Drug, String> dateWhenBuyDrug;
 
     private boolean close =true;
+
+    public DrugController() throws Exception {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initComboxCompanyName();
-        refreshTable();
+        try {
+            initComboxCompanyName();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         disable(close);
-
     }
 
-    private void refreshTable() {
-    }
 
     private void disable(boolean close) {
         drugName.setDisable(close);
@@ -89,14 +93,12 @@ public class DrugController implements Initializable {
         dateWhenBuyDrug.setCellValueFactory(new PropertyValueFactory<>("date"));
 
     }
-    private void refreshTable(long idRefresh){
-        loadTable();
-        drugs = FXCollections.observableArrayList(drugRepository.getDrugsByIdCompany(idRefresh));
-        tableDataDrug.setItems(drugs);
+    private void refreshTable(){
 
     }
 
-    private void initComboxCompanyName() {
+
+    private void initComboxCompanyName() throws Exception {
         CompanyRepository companyRepository = new CompanyRepository();
         List<Company> companies = companyRepository.getAllCompany();
         List<DropDown> companyNameList =new ArrayList<>();
@@ -123,7 +125,7 @@ public class DrugController implements Initializable {
         Long companyId= dropDown.getId();
         Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
         drugRepository.saveDrug(newDrug);
-        refreshTable(companyId);
+        refreshTable();
 
     }
     public void fillCB(ActionEvent actionEvent) {

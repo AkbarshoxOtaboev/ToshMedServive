@@ -6,14 +6,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javafx.stage.Stage;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import uz.test.db.HibernateUtils;
+
 
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Session session = HibernateUtils.openSession();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/loginpage.fxml"));
         stage.setTitle("Tizimga kirish");
         stage.setScene(new Scene(root, 314, 290));

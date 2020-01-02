@@ -30,6 +30,9 @@ public class CompanyController implements Initializable {
     @FXML
     private TableColumn<Company, Integer> debt;
 
+    public CompanyController() throws Exception {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
