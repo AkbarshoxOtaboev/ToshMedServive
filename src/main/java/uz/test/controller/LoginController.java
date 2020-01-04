@@ -13,8 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import uz.test.model.Admin;
+import uz.test.repository.AdmiRepository;
 
+import javax.swing.*;
 import javax.swing.plaf.OptionPaneUI;
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,8 +40,9 @@ public class LoginController implements Initializable {
     }
 
 
-    public void kirish(ActionEvent actionEvent) {
-        if(login.getText().equals("admin") && parol.getText().equals("admin")){
+    public void kirish(ActionEvent actionEvent) throws Exception {
+        Admin admin = new AdmiRepository().getAdminByID((long) 1);
+        if(login.getText().equals(admin.getLogin()) && parol.getText().equals(admin.getPassword())){
             try{
                 Parent root = FXMLLoader.load(getClass().getResource(DASHBOARD));
                 Stage stage = new Stage();
@@ -47,7 +52,11 @@ public class LoginController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else {
+            JOptionPane.showMessageDialog(null,"Hotolik yuz berdi" );
+
         }
+
     }
 }
 

@@ -1,7 +1,5 @@
 package uz.test.model;
 
-import javafx.beans.property.StringProperty;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,8 +12,11 @@ public class Company {
     private String name;
     private Integer balans;
 
-    @OneToMany(fetch = FetchType.EAGER,mappedBy = "company_id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "company_id")
     private List<Drug> getAllDrugsByIdCompany;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company_id")
+    private List<Payment> getAllPaymentsByIdCompany;
 
     public Company() {
     }
@@ -55,5 +56,13 @@ public class Company {
 
     public void setGetAllDrugsByIdCompany(List<Drug> getAllDrugsByIdCompany) {
         this.getAllDrugsByIdCompany = getAllDrugsByIdCompany;
+    }
+
+    public List<Payment> getGetAllPaymentsByIdCompany() {
+        return getAllPaymentsByIdCompany;
+    }
+
+    public void setGetAllPaymentsByIdCompany(List<Payment> getAllPaymentsByIdCompany) {
+        this.getAllPaymentsByIdCompany = getAllPaymentsByIdCompany;
     }
 }

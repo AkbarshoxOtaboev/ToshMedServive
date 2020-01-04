@@ -11,12 +11,20 @@ public class Payment {
     private Integer paymentVolume;
     private String date;
 
+    private Long company_id;
+
     public Payment() {
     }
 
     public Payment(Integer paymentVolume, String date) {
         this.paymentVolume = paymentVolume;
         this.date = date;
+    }
+
+    public Payment(Integer paymentVolume, String date, Long company_id) {
+        this.paymentVolume = paymentVolume;
+        this.date = date;
+        this.company_id = company_id;
     }
 
     public Long getId() {
@@ -41,5 +49,13 @@ public class Payment {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public Long getCompanyId() {
+        return company_id;
+    }
+
+    public void setCompanyId(Long company_id) {
+        this.company_id = company_id;
     }
 }

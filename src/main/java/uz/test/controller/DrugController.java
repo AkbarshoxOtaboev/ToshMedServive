@@ -11,7 +11,6 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCode;
 import uz.test.model.Company;
 import uz.test.model.Drug;
 import uz.test.repository.CompanyRepository;
@@ -72,6 +71,10 @@ public class DrugController implements Initializable {
             e.printStackTrace();
         }
         disable(close);
+        refreshTable();
+        companyCB.setOnAction(actionEvent -> {
+            comboBoxEvent();
+        });
     }
 
 
@@ -94,7 +97,9 @@ public class DrugController implements Initializable {
 
     }
     private void refreshTable(){
-
+        loadTable();
+        drugs = FXCollections.observableArrayList(drugRepository.getAllDrugs());
+        tableDataDrug.setItems(drugs);
     }
 
 
@@ -128,7 +133,8 @@ public class DrugController implements Initializable {
         refreshTable();
 
     }
-    public void fillCB(ActionEvent actionEvent) {
+
+    public void comboBoxEvent() {
         close = false;
         disable(close);
         DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
@@ -137,6 +143,5 @@ public class DrugController implements Initializable {
         loadTable();
         drugs = FXCollections.observableArrayList(drugRepository.getDrugsByIdCompany(companyId));
         tableDataDrug.setItems(drugs);
-
     }
 }
