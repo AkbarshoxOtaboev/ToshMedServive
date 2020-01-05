@@ -57,19 +57,15 @@ public class DrugRepository {
     }
 
     public void deleteDrug(Long id) {
-        Session session = null;
+
         try {
-            session = HibernateUtils.openSession();
+
             Drug deleteDrug = session.find(Drug.class, id);
             session.getTransaction().begin();
             session.remove(deleteDrug);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
         }
     }
 

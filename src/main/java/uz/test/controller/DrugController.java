@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class DrugController implements Initializable {
     private DrugRepository drugRepository = new DrugRepository();
+    private CompanyRepository companyRepository = new CompanyRepository();
     @FXML
     private JFXComboBox<DropDown> companyCB;
 
@@ -130,7 +131,13 @@ public class DrugController implements Initializable {
         Long companyId= dropDown.getId();
         Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
         drugRepository.saveDrug(newDrug);
+        Company company = companyRepository.getCompanyById(companyId);
+        Integer companyBalans = company.getBalans();
+        company.setBalans((int) (companyBalans - generalPrice));
+        company.setId(companyId);
+        companyRepository.updateCompany(company);
         refreshTable();
+
 
     }
 
