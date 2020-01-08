@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 
 public class SibeBarController implements Initializable {
     private final String COMPANY_UI = "/fxml/company.fxml";
-    private final String DRAG_UI = "/fxml/drag.fxml";
+    private final String DRAG_UI = "/fxml/drug.fxml";
     private final String PAYMENT_UI= "/fxml/payment.fxml";
     private final String STATISTIKA_UI = "/fxml/statistika.fxml";
     @FXML
@@ -41,7 +41,9 @@ public class SibeBarController implements Initializable {
     private void loadUI(String uiPath){
         Parent root = null;
         try{
-            root = FXMLLoader.load(getClass().getResource(uiPath));
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource(uiPath));
+            root = fxmlLoader.load();
         } catch (Exception e) {
             System.err.println(e);
         }
