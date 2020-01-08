@@ -16,8 +16,7 @@
 
 <AnchorPane prefHeight="451.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uz.test.controller.PaymentController">
    <children>
-      <Pane layoutX="79.0" layoutY="26.0" prefHeight="28.0" prefWidth="600.0" style="-fx-background-color: #2593E5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <HBox alignment="CENTER" layoutX="58.0" layoutY="28.0" prefHeight="42.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <HBox alignment="CENTER" layoutX="58.0" layoutY="28.0" prefHeight="42.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label text="To`lovlar bo`limi">
                <font>
@@ -26,17 +25,17 @@
             </Label>
          </children>
       </HBox>
-      <Pane layoutY="70.0" prefHeight="28.0" prefWidth="600.0" style="-fx-background-color: #2593E5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <TableView fx:id="tableDate" layoutX="311.0" layoutY="137.0" prefHeight="303.0" prefWidth="391.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="306.0" AnchorPane.topAnchor="137.0">
+      <Pane layoutY="42.0" prefHeight="6.0" prefWidth="718.0" style="-fx-background-color: #2593E5;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <TableView fx:id="tableDate" layoutX="311.0" layoutY="137.0" prefHeight="303.0" prefWidth="391.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="306.0" AnchorPane.topAnchor="100.0">
         <columns>
            <TableColumn fx:id="id" prefWidth="52.0" text="№" />
            <TableColumn fx:id="paymentVolume" prefWidth="188.0" text="To`lov hajmi" />
            <TableColumn fx:id="date" prefWidth="134.0" text="Sana" />
         </columns>
       </TableView>
-      <VBox layoutX="14.0" layoutY="111.0" prefHeight="324.0" prefWidth="279.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="111.0">
+      <VBox layoutX="14.0" layoutY="111.0" prefHeight="324.0" prefWidth="279.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="70.0">
          <children>
-            <JFXComboBox fx:id="companyCB" onAction="#selectComboBox" labelFloat="true" prefHeight="25.0" prefWidth="257.0" promptText="Ko`rxonalar">
+            <JFXComboBox fx:id="companyCB" labelFloat="true" onAction="#selectComboBox" prefHeight="25.0" prefWidth="257.0" promptText="Ko`rxonalar">
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
@@ -61,6 +60,6 @@
             </JFXButton>
          </children>
       </VBox>
-      <JFXButton layoutX="306.0" layoutY="105.0" onAction="#print" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: red;" text="Print" textFill="WHITE" AnchorPane.leftAnchor="306.0" />
+      <JFXButton layoutX="306.0" layoutY="105.0" onAction="#print" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: red;" text="Print" textFill="WHITE" AnchorPane.leftAnchor="306.0" AnchorPane.topAnchor="65.0" />
    </children>
 </AnchorPane>

@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.hibernate.Session;
 import uz.test.db.HibernateUtils;
+import uz.test.model.Admin;
+import uz.test.repository.AdmiRepository;
 
 
 public class App extends Application {
@@ -20,6 +22,8 @@ public class App extends Application {
         stage.setResizable(false);
         stage.show();
     }
+
+
 
     public static void main(String[] args)  {
         launch(args);

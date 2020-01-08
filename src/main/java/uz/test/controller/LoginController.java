@@ -48,6 +48,7 @@ public class LoginController implements Initializable {
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.initModality(Modality.APPLICATION_MODAL);
+                stage.setTitle("Toshkent MedService");
                 stage.show();
             } catch (IOException e) {
                 e.printStackTrace();

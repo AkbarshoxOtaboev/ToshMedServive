@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import uz.test.model.Company;
 import uz.test.repository.CompanyRepository;
 
+import javax.swing.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -55,16 +56,32 @@ public class CompanyController implements Initializable {
     }
 
     public void delete(javafx.event.ActionEvent actionEvent) {
+
+
+        if(tableData.getSelectionModel().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ro`yhatdan tanlang");
+        }else{
+            Company company = tableData.getSelectionModel().getSelectedItem();
+            Long id = company.getId();
+            companyRepository.deleteCompany(id);
+            refreshTable();
+        }
     }
 
     public void save(javafx.event.ActionEvent actionEvent) {
+
         String companyName =inputCompanyName.getText();
         Integer balans = 0;
-        Company company = new Company(companyName,balans);
-        companyRepository.createCompany(company);
-        refreshTable();
-    }
+        if(companyName.equals("")){
+            JOptionPane.showMessageDialog(null, "Korxona nomi kirgizing");
+        }else {
+            Company company = new Company(companyName,balans);
+            companyRepository.createCompany(company);
+            refreshTable();
+        }
 
+
+    }
     public void payment(javafx.event.ActionEvent actionEvent) {
     }
 

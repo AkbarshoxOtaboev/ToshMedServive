@@ -22,6 +22,8 @@ import uz.test.repository.AdmiRepository;
 import uz.test.repository.CompanyRepository;
 import uz.test.repository.PaymentRepository;
 
+import javax.swing.*;
+
 public class PaymentController implements Initializable {
 
     private PaymentRepository paymentRepository = new PaymentRepository();
@@ -94,18 +96,24 @@ public class PaymentController implements Initializable {
     }
 
     public void payment(ActionEvent actionEvent) {
-       Integer pavmentVolume = Integer.parseInt(paymennvolumeTF.getText());
-       String  datePayment = paymentDate.getValue().toString();
-       DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
-       Long companyID = dropDown.getId();
-       Payment payment = new Payment(pavmentVolume,datePayment,companyID);
-       paymentRepository.creataPayment(payment);
-       Company company = companyRepository.getCompanyById(companyID);
-       Integer companyBalans= company.getBalans();
-       company.setBalans(companyBalans + pavmentVolume);
-       company.setId(companyID);
-       companyRepository.updateCompany(company);
-       refreshTable();
+        if(companyCB.getSelectionModel().isEmpty() || paymennvolumeTF.getText().isEmpty() || paymentDate.getValue().toString().isEmpty()){
+            JOptionPane.showMessageDialog(null,"Barcha maydonlarni to`ldiring");
+        }
+        else{
+            Integer pavmentVolume = Integer.parseInt(paymennvolumeTF.getText());
+            String  datePayment = paymentDate.getValue().toString();
+            DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+            Long companyID = dropDown.getId();
+            Payment payment = new Payment(pavmentVolume,datePayment,companyID);
+            paymentRepository.creataPayment(payment);
+            Company company = companyRepository.getCompanyById(companyID);
+            Integer companyBalans= company.getBalans();
+            company.setBalans(companyBalans + pavmentVolume);
+            company.setId(companyID);
+            companyRepository.updateCompany(company);
+            refreshTable();
+        }
+
     }
 
     public void print(ActionEvent actionEvent) {
