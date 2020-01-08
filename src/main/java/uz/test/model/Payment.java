@@ -11,7 +11,7 @@ public class Payment {
     private Integer paymentVolume;
     private String date;
 
-    private Long company_id;
+    private Long companyId;
 
     public Payment() {
     }
@@ -24,8 +24,9 @@ public class Payment {
     public Payment(Integer paymentVolume, String date, Long company_id) {
         this.paymentVolume = paymentVolume;
         this.date = date;
-        this.company_id = company_id;
+        this.companyId = company_id;
     }
+
 
     public Long getId() {
         return id;
@@ -52,10 +53,10 @@ public class Payment {
     }
 
     public Long getCompanyId() {
-        return company_id;
+        return companyId;
     }
 
     public void setCompanyId(Long company_id) {
-        this.company_id = company_id;
+        this.companyId = company_id;
     }
 }

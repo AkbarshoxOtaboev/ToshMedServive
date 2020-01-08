@@ -1,5 +1,8 @@
 package uz.test.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -15,7 +18,8 @@ public class Company {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "company_id")
     private List<Drug> getAllDrugsByIdCompany;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company_id")
+    @OneToMany(mappedBy = "companyId")
+    @LazyCollection(value = LazyCollectionOption.FALSE)
     private List<Payment> getAllPaymentsByIdCompany;
 
     public Company() {

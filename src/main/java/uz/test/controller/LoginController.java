@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
         Admin admin = new AdmiRepository().getAdminByID((long) 1);
         if(login.getText().equals(admin.getLogin()) && parol.getText().equals(admin.getPassword())){
             try{
-                Parent root = FXMLLoader.load(getClass().getResource(DASHBOARD));
+                Parent root = FXMLLoader.load(getClass().getResource("/fxml/sidebar.fxml"));
                 Stage stage = new Stage();
                 stage.setScene(new Scene(root));
                 stage.initModality(Modality.APPLICATION_MODAL);
