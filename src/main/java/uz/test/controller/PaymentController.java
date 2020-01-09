@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import uz.test.model.Company;
 import uz.test.model.Payment;
@@ -35,7 +36,8 @@ public class PaymentController implements Initializable {
     @FXML
     private TableColumn<Payment, Long> id;
 
-
+    @FXML
+    private TableColumn<Payment, String> paymentComment;
 
     @FXML
     private TableColumn<Payment, Double> paymentVolume;
@@ -48,6 +50,9 @@ public class PaymentController implements Initializable {
 
     @FXML
     private JFXTextField paymennvolumeTF;
+
+    @FXML
+    private TextArea comment;
 
     @FXML
     private DatePicker paymentDate;
@@ -87,9 +92,15 @@ public class PaymentController implements Initializable {
         payments = FXCollections.observableArrayList(paymentRepository.getAllPayments());
         tableDate.setItems(payments);
     }
+    private void refreshtableById( Long id){
+        loadTable();
+        payments = FXCollections.observableArrayList(paymentRepository.getPaymentsByCompanyID(id));
+        tableDate.setItems(payments);
+    }
 
     private void loadTable() {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        paymentComment.setCellValueFactory(new PropertyValueFactory<>("commentary"));
         paymentVolume.setCellValueFactory(new PropertyValueFactory<>("paymentVolume"));
         date.setCellValueFactory(new PropertyValueFactory<>("date"));
 
@@ -100,18 +111,19 @@ public class PaymentController implements Initializable {
             JOptionPane.showMessageDialog(null,"Barcha maydonlarni to`ldiring");
         }
         else{
+            String paymentComment = comment.getText();
             Integer pavmentVolume = Integer.parseInt(paymennvolumeTF.getText());
             String  datePayment = paymentDate.getValue().toString();
             DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
             Long companyID = dropDown.getId();
-            Payment payment = new Payment(pavmentVolume,datePayment,companyID);
+            Payment payment = new Payment(paymentComment,pavmentVolume,datePayment,companyID);
             paymentRepository.creataPayment(payment);
             Company company = companyRepository.getCompanyById(companyID);
             Integer companyBalans= company.getBalans();
             company.setBalans(companyBalans + pavmentVolume);
             company.setId(companyID);
             companyRepository.updateCompany(company);
-            refreshTable();
+            refreshtableById(companyID);
         }
 
     }
@@ -125,5 +137,20 @@ public class PaymentController implements Initializable {
         payments = FXCollections.observableArrayList(paymentRepository.getPaymentsByCompanyID(companyID));
         loadTable();
         tableDate.setItems(payments);
+    }
+
+    public void removePayment(ActionEvent actionEvent) {
+        if(tableDate.getSelectionModel().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ro`yhatdan tanlang");
+        }else{
+            Payment payment = tableDate.getSelectionModel().getSelectedItem();
+            DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+            Long companyId = dropDown.getId();
+            Long id = payment.getId();
+            paymentRepository.deletePayment(id);
+            tableDate.refresh();
+            refreshtableById(companyId);
+
+        }
     }
 }

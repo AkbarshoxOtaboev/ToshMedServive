@@ -16,7 +16,9 @@ import uz.test.model.Drug;
 import uz.test.repository.CompanyRepository;
 import uz.test.repository.DrugRepository;
 
+import javax.swing.*;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -60,7 +62,7 @@ public class DrugController implements Initializable {
     private TableColumn<Drug, String> dateWhenBuyDrug;
 
     private boolean close =true;
-
+    private boolean update = true;
     public DrugController() throws Exception {
     }
 
@@ -122,22 +124,43 @@ public class DrugController implements Initializable {
     }
 
     public void saveDrug(ActionEvent actionEvent) {
-        String name = drugName.getText();
-        Integer count= Integer.parseInt(String.valueOf(drugCount.getText()));
-        Double price= Double.parseDouble(String.valueOf(drugPrice.getText()));
-        Double generalPrice = 1.0*count*price;
-        String dateBuy = date.getValue().toString();
-        DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
-        Long companyId= dropDown.getId();
-        Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
-        drugRepository.saveDrug(newDrug);
-        Company company = companyRepository.getCompanyById(companyId);
-        Integer companyBalans = company.getBalans();
-        company.setBalans((int) (companyBalans - generalPrice));
-        company.setId(companyId);
-        companyRepository.updateCompany(company);
-        refreshTable();
+        if (update){
+            String name = drugName.getText();
+            Integer count= Integer.parseInt(String.valueOf(drugCount.getText()));
+            Double price= Double.parseDouble(String.valueOf(drugPrice.getText()));
+            Double generalPrice = 1.0*count*price;
+            String dateBuy = date.getValue().toString();
+            DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+            Long companyId= dropDown.getId();
+            Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
+            drugRepository.saveDrug(newDrug);
+            Company company = companyRepository.getCompanyById(companyId);
+            Integer companyBalans = company.getBalans();
+            company.setBalans((int) (companyBalans - generalPrice));
+            company.setId(companyId);
+            companyRepository.updateCompany(company);
+            refreshTable();
+        }else {
+            if(companyCB.getSelectionModel().isEmpty()){
+                JOptionPane.showMessageDialog(null, "Korxonani tanlang");
+            }else{
+                Drug selectedDrug = tableDataDrug.getSelectionModel().getSelectedItem();
+                String name = drugName.getText();
+                Integer count= Integer.parseInt(String.valueOf(drugCount.getText()));
+                Double price= Double.parseDouble(String.valueOf(drugPrice.getText()));
+                Double generalPrice = 1.0*count*price;
+                String dateBuy = date.getValue().toString();
+                DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+                Long companyId= dropDown.getId();
+                Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
+                newDrug.setId(selectedDrug.getId());
+                drugRepository.updateDrug(newDrug);
+                refreshTable();
 
+            }
+
+
+        }
 
     }
 
@@ -150,5 +173,32 @@ public class DrugController implements Initializable {
         loadTable();
         drugs = FXCollections.observableArrayList(drugRepository.getDrugsByIdCompany(companyId));
         tableDataDrug.setItems(drugs);
+    }
+
+
+    public void deleteDrug(ActionEvent actionEvent) {
+        if(tableDataDrug.getSelectionModel().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ro`yhatdan tanlang");
+        }else {
+            Drug drug = tableDataDrug.getSelectionModel().getSelectedItem();
+            Long id = drug.getId();
+            drugRepository.deleteDrug(id);
+            refreshTable();
+        }
+    }
+
+    public void updateDrug(ActionEvent actionEvent) {
+        if(tableDataDrug.getSelectionModel().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ro`yhatdan tanlang");
+        }else {
+            update = false;
+            disable(false);
+            Drug drug = tableDataDrug.getSelectionModel().getSelectedItem();
+            drugName.setText(drug.getDrugName());
+            drugCount.setText(drug.getCount().toString());
+            drugPrice.setText(drug.getPrice().toString());
+            date.setValue(LocalDate.parse(drug.getDate()));
+
+        }
     }
 }

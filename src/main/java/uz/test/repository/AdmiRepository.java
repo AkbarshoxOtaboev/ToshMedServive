@@ -14,7 +14,7 @@ public class AdmiRepository {
     }
 
     public List<Admin> getAllAdmin(){
-        ;
+
         List<Admin> admins = new ArrayList<>();
         try{
             admins = session.createQuery("SELECT s FROM Admin s").getResultList();
@@ -50,9 +50,9 @@ public class AdmiRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            if(session != null && session.isOpen()){
-                session.close();
-            }
+                if(session != null && session.isOpen()){
+                    session.close();
+                }
         }
     }
 }

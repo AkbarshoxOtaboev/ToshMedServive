@@ -8,6 +8,7 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String commentary;
     private Integer paymentVolume;
     private String date;
 
@@ -16,16 +17,14 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Integer paymentVolume, String date) {
+
+    public Payment(String commentary, Integer paymentVolume, String date, Long companyId) {
+        this.commentary = commentary;
         this.paymentVolume = paymentVolume;
         this.date = date;
+        this.companyId = companyId;
     }
 
-    public Payment(Integer paymentVolume, String date, Long company_id) {
-        this.paymentVolume = paymentVolume;
-        this.date = date;
-        this.companyId = company_id;
-    }
 
 
     public Long getId() {
@@ -58,5 +57,13 @@ public class Payment {
 
     public void setCompanyId(Long company_id) {
         this.companyId = company_id;
+    }
+
+    public String getCommentary() {
+        return commentary;
+    }
+
+    public void setCommentary(String commentary) {
+        this.commentary = commentary;
     }
 }

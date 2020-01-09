@@ -69,6 +69,17 @@ public class DrugRepository {
         }
     }
 
+    public void updateDrug(Drug drug){
+        try{
+            session.getTransaction().begin();
+            session.merge(drug);
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public List<Drug> getDrugsByIdCompany(Long company_id) {
 
         List<Drug> drugs = null;
