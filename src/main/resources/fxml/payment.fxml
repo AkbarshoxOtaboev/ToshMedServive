@@ -71,7 +71,7 @@
          </children>
       </VBox>
       <JFXButton buttonType="RAISED" layoutX="481.0" layoutY="63.0" onAction="#print" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: green;" text="Print" textFill="WHITE" AnchorPane.leftAnchor="481.0" AnchorPane.topAnchor="63.0" />
-      <JFXButton buttonType="RAISED" layoutX="393.0" layoutY="63.0" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: orange;" text="O`zgartirish" textFill="WHITE" />
+      <JFXButton onAction="#updateBtn" buttonType="RAISED" layoutX="393.0" layoutY="63.0" prefHeight="25.0" prefWidth="78.0" style="-fx-background-color: orange;" text="O`zgartirish" textFill="WHITE" />
       <JFXButton alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" layoutX="306.0" layoutY="63.0" onAction="#removePayment" style="-fx-background-color: red;" text="   O`chirish  " textFill="WHITE" />
    </children>
 </AnchorPane>

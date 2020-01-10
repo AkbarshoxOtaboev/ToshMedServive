@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -57,8 +58,11 @@ public class PaymentController implements Initializable {
     @FXML
     private DatePicker paymentDate;
 
+
     public PaymentController() throws Exception {
     }
+
+    private boolean update = true;
     private ObservableList<Payment> payments = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -107,23 +111,36 @@ public class PaymentController implements Initializable {
     }
 
     public void payment(ActionEvent actionEvent) {
-        if(companyCB.getSelectionModel().isEmpty() || paymennvolumeTF.getText().isEmpty() || paymentDate.getValue().toString().isEmpty()){
-            JOptionPane.showMessageDialog(null,"Barcha maydonlarni to`ldiring");
-        }
-        else{
+        if(update){
+            if(companyCB.getSelectionModel().isEmpty() || paymennvolumeTF.getText().isEmpty() || paymentDate.getValue().toString().isEmpty()){
+                JOptionPane.showMessageDialog(null,"Barcha maydonlarni to`ldiring");
+            }
+            else{
+                String paymentComment = comment.getText();
+                Integer pavmentVolume = Integer.parseInt(paymennvolumeTF.getText());
+                String  datePayment = paymentDate.getValue().toString();
+                DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
+                Long companyID = dropDown.getId();
+                Payment payment = new Payment(paymentComment,pavmentVolume,datePayment,companyID);
+                paymentRepository.creataPayment(payment);
+                Company company = companyRepository.getCompanyById(companyID);
+                Integer companyBalans= company.getBalans();
+                company.setBalans(companyBalans + pavmentVolume);
+                company.setId(companyID);
+                companyRepository.updateCompany(company);
+                refreshtableById(companyID);
+            }
+
+        }else {
             String paymentComment = comment.getText();
             Integer pavmentVolume = Integer.parseInt(paymennvolumeTF.getText());
             String  datePayment = paymentDate.getValue().toString();
             DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
             Long companyID = dropDown.getId();
             Payment payment = new Payment(paymentComment,pavmentVolume,datePayment,companyID);
-            paymentRepository.creataPayment(payment);
-            Company company = companyRepository.getCompanyById(companyID);
-            Integer companyBalans= company.getBalans();
-            company.setBalans(companyBalans + pavmentVolume);
-            company.setId(companyID);
-            companyRepository.updateCompany(company);
-            refreshtableById(companyID);
+
+
+
         }
 
     }
@@ -151,6 +168,18 @@ public class PaymentController implements Initializable {
             tableDate.refresh();
             refreshtableById(companyId);
 
+        }
+    }
+
+    public void updateBtn(ActionEvent actionEvent) {
+        if(tableDate.getSelectionModel().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ro`yhatdan tanlang");
+        }else {
+            Payment payment = tableDate.getSelectionModel().getSelectedItem();
+            comment.setText(payment.getCommentary());
+            paymennvolumeTF.setText(payment.getPaymentVolume().toString());
+            paymentDate.setValue(LocalDate.parse(payment.getDate()));
+            update = false;
         }
     }
 }

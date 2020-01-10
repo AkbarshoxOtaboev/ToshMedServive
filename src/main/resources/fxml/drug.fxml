@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="436.0" prefWidth="1052.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uz.test.controller.DrugController">
+<AnchorPane prefHeight="489.0" prefWidth="1052.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uz.test.controller.DrugController">
     <children>
         <VBox alignment="TOP_CENTER" layoutX="38.0" layoutY="68.0" prefHeight="421.0" prefWidth="265.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="75.0">
             <children>
@@ -86,7 +86,7 @@
                 </Label>
             </children>
         </Pane>
-      <TableView fx:id="tableDataDrug" layoutX="274.0" layoutY="75.0" prefHeight="405.0" prefWidth="778.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="274.0" AnchorPane.topAnchor="75.0">
+      <TableView fx:id="tableDataDrug" layoutX="274.0" layoutY="75.0" prefHeight="367.0" prefWidth="778.0" AnchorPane.bottomAnchor="47.0" AnchorPane.leftAnchor="274.0" AnchorPane.topAnchor="75.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="75.0" text="№" />
             <TableColumn fx:id="drugNameInTable" prefWidth="222.0" text="Dori nomi" />
@@ -96,5 +96,6 @@
             <TableColumn fx:id="dateWhenBuyDrug" prefWidth="120.0" text="Olingan vaqt" />
         </columns>
       </TableView>
+      <JFXButton layoutX="959.0" layoutY="450.0" onAction="#print" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: blue;" text="Print" textFill="WHITE" AnchorPane.bottomAnchor="14.0" />
     </children>
 </AnchorPane>

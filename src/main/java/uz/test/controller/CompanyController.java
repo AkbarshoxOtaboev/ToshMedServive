@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -36,6 +37,7 @@ public class CompanyController implements Initializable {
 
     public CompanyController() throws Exception {
     }
+     private boolean update = true;
      private ObservableList<Company> companies = FXCollections.observableArrayList();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -69,16 +71,25 @@ public class CompanyController implements Initializable {
     }
 
     public void save(javafx.event.ActionEvent actionEvent) {
-
-        String companyName =inputCompanyName.getText();
-        Integer balans = 0;
-        if(companyName.equals("")){
-            JOptionPane.showMessageDialog(null, "Korxona nomi kirgizing");
+        if(update){
+            String companyName =inputCompanyName.getText();
+            Integer balans = 0;
+            if(companyName.equals("")){
+                JOptionPane.showMessageDialog(null, "Korxona nomi kirgizing");
+            }else {
+                Company company = new Company(companyName,balans);
+                companyRepository.createCompany(company);
+                refreshTable();
+            }
         }else {
-            Company company = new Company(companyName,balans);
-            companyRepository.createCompany(company);
+            String companyName =inputCompanyName.getText();
+            Company company = tableData.getSelectionModel().getSelectedItem();
+            Company updCompany = new Company(companyName , company.getBalans());
+            updCompany.setId(company.getId());
+            companyRepository.updateCompany(updCompany);
             refreshTable();
         }
+
 
 
     }
@@ -86,4 +97,13 @@ public class CompanyController implements Initializable {
     }
 
 
+    public void updateBtn(ActionEvent actionEvent) {
+        if(tableData.getSelectionModel().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ro`yhatdan tanlang");
+        }else {
+            Company company = tableData.getSelectionModel().getSelectedItem();
+            inputCompanyName.setText(company.getName());
+            update = false;
+        }
+    }
 }

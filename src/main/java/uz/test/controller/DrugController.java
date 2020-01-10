@@ -201,4 +201,7 @@ public class DrugController implements Initializable {
 
         }
     }
+
+    public void print(ActionEvent actionEvent) {
+    }
 }

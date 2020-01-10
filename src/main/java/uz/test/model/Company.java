@@ -25,6 +25,10 @@ public class Company {
     public Company() {
     }
 
+    public Company(String name) {
+        this.name = name;
+    }
+
     public Company(String name, Integer balans) {
         this.name = name;
         this.balans = balans;

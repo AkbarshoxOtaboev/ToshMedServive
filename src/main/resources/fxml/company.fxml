@@ -33,7 +33,7 @@
                <children>
                   <JFXButton onAction="#save" style="-fx-background-color: #4fe56a;" text="Saqlash" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -41,7 +41,15 @@
                   </JFXButton>
                   <JFXButton onAction="#delete" style="-fx-background-color: red;" text="O`chirish" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="14.0" />
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton onAction="#updateBtn" style="-fx-background-color: orange;" text="O`zgartirish" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
                      </font>
                      <HBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
