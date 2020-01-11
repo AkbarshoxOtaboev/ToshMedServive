@@ -154,7 +154,12 @@ public class DrugController implements Initializable {
                 Long companyId= dropDown.getId();
                 Drug newDrug = new Drug(name,count,price,generalPrice,dateBuy,companyId);
                 newDrug.setId(selectedDrug.getId());
+                Company company = companyRepository.getCompanyById(companyId);
+                company.setBalans((int) (company.getBalans() + selectedDrug.getGeneralPrice()));
                 drugRepository.updateDrug(newDrug);
+                company.setBalans((int) (company.getBalans() - generalPrice));
+                company.setId(companyId);
+                companyRepository.updateCompany(company);
                 refreshTable();
 
             }

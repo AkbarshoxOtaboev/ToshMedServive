@@ -54,4 +54,14 @@ public class PaymentRepository {
         }
         return payments;
     }
+
+    public void updatePayment(Payment payment){
+        try{
+            session.getTransaction().begin();
+            session.merge(payment);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+           System.err.println(e);
+        }
+    }
 }

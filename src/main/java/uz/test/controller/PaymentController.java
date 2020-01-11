@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
 import uz.test.model.Company;
+import uz.test.model.Drug;
 import uz.test.model.Payment;
 import uz.test.repository.AdmiRepository;
 import uz.test.repository.CompanyRepository;
@@ -130,17 +131,22 @@ public class PaymentController implements Initializable {
                 companyRepository.updateCompany(company);
                 refreshtableById(companyID);
             }
-
         }else {
+            Payment selectedPayment = tableDate.getSelectionModel().getSelectedItem();
             String paymentComment = comment.getText();
             Integer pavmentVolume = Integer.parseInt(paymennvolumeTF.getText());
             String  datePayment = paymentDate.getValue().toString();
             DropDown dropDown = companyCB.getSelectionModel().getSelectedItem();
             Long companyID = dropDown.getId();
             Payment payment = new Payment(paymentComment,pavmentVolume,datePayment,companyID);
-
-
-
+            payment.setId(selectedPayment.getId());
+            Company company = companyRepository.getCompanyById(companyID);
+            company.setBalans(company.getBalans() - selectedPayment.getPaymentVolume());
+            paymentRepository.updatePayment(payment);
+            company.setBalans(company.getBalans() + pavmentVolume);
+            company.setId(companyID);
+            companyRepository.updateCompany(company);
+            refreshtableById(companyID);
         }
 
     }
@@ -178,6 +184,7 @@ public class PaymentController implements Initializable {
             Payment payment = tableDate.getSelectionModel().getSelectedItem();
             comment.setText(payment.getCommentary());
             paymennvolumeTF.setText(payment.getPaymentVolume().toString());
+//            paymennvolumeTF.setDisable(true);
             paymentDate.setValue(LocalDate.parse(payment.getDate()));
             update = false;
         }
