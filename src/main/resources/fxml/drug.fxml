@@ -96,6 +96,6 @@
             <TableColumn fx:id="dateWhenBuyDrug" prefWidth="120.0" text="Olingan vaqt" />
         </columns>
       </TableView>
-      <JFXButton layoutX="959.0" layoutY="450.0" onAction="#print" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: blue;" text="Print" textFill="WHITE" AnchorPane.bottomAnchor="14.0" />
+      <JFXButton fx:id="printBtn" layoutX="959.0" layoutY="450.0" onAction="#print" prefHeight="25.0" prefWidth="79.0" style="-fx-background-color: blue;" text="Print" textFill="WHITE" AnchorPane.bottomAnchor="14.0" />
     </children>
 </AnchorPane>

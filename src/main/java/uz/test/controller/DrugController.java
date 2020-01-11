@@ -7,10 +7,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.print.PrinterJob;
+import javafx.stage.Stage;
 import uz.test.model.Company;
 import uz.test.model.Drug;
 import uz.test.repository.CompanyRepository;
@@ -60,6 +63,9 @@ public class DrugController implements Initializable {
 
     @FXML
     private TableColumn<Drug, String> dateWhenBuyDrug;
+
+    @FXML
+    private Button printBtn;
 
     private boolean close =true;
     private boolean update = true;
@@ -207,6 +213,13 @@ public class DrugController implements Initializable {
         }
     }
 
+
+
     public void print(ActionEvent actionEvent) {
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+        Stage stage = null;
+        printerJob.showPrintDialog(stage);
+        printerJob.printPage(tableDataDrug);
+        printerJob.endJob();
     }
 }

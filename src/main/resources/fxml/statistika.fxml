@@ -57,7 +57,7 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton fx:id="printBtn" layoutX="906.0" layoutY="453.0" prefHeight="29.0" prefWidth="91.0" style="-fx-background-color: #2593E5;" text="Chiqarish" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
+      <JFXButton fx:id="printBtn"  layoutX="906.0" layoutY="453.0" prefHeight="29.0" prefWidth="91.0" style="-fx-background-color: #2593E5;" text="Chiqarish" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
          <font>
             <Font size="13.0" />
          </font>
