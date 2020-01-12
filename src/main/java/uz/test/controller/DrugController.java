@@ -6,7 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PageOrientation;
+import javafx.print.Paper;
+import javafx.print.Printer;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
@@ -14,12 +20,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.print.PrinterJob;
 import javafx.stage.Stage;
+import uz.test.App;
 import uz.test.model.Company;
 import uz.test.model.Drug;
 import uz.test.repository.CompanyRepository;
 import uz.test.repository.DrugRepository;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -215,11 +223,15 @@ public class DrugController implements Initializable {
 
 
 
-    public void print(ActionEvent actionEvent) {
-        PrinterJob printerJob = PrinterJob.createPrinterJob();
-        Stage stage = null;
-        printerJob.showPrintDialog(stage);
-        printerJob.printPage(tableDataDrug);
-        printerJob.endJob();
+    public void print(ActionEvent actionEvent) throws IOException {
+        try{
+            PrinterJob printerJob = PrinterJob.createPrinterJob();
+            printerJob.showPrintDialog(tableDataDrug.getScene().getWindow());
+            printerJob.printPage(tableDataDrug);
+            printerJob.endJob();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
