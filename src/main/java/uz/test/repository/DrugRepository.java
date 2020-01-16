@@ -8,6 +8,7 @@ import uz.test.model.Drug;
 
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +94,20 @@ public class DrugRepository {
             e.printStackTrace();
         }
         return drugs;
+    }
+    public InputStream getdrugs(Long companyID){
+        InputStream input = null;
+        ResultSet rs = null;
+        try{
+            Company company = session.find(Company.class,companyID);
+            rs = (ResultSet) company.getGetAllDrugsByIdCompany();
+            while (rs.next()){
+                input = rs.getBinaryStream(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return input;
     }
 
 

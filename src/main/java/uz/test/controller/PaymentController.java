@@ -13,10 +13,8 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
 import javafx.fxml.FXML;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextArea;
+import javafx.print.Printer;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import uz.test.model.Company;
 import uz.test.model.Drug;
@@ -152,6 +150,7 @@ public class PaymentController implements Initializable {
     }
 
     public void print(ActionEvent actionEvent) {
+
     }
 
     public void selectComboBox(ActionEvent actionEvent) {

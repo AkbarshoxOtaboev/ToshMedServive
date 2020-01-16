@@ -8,9 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.print.PageOrientation;
-import javafx.print.Paper;
-import javafx.print.Printer;
+import javafx.print.*;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,21 +17,22 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.print.PrinterJob;
+import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import uz.test.App;
 import uz.test.model.Company;
 import uz.test.model.Drug;
 import uz.test.repository.CompanyRepository;
 import uz.test.repository.DrugRepository;
+import uz.test.repository.Report;
 
 import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class DrugController implements Initializable {
     private DrugRepository drugRepository = new DrugRepository();
@@ -79,6 +79,8 @@ public class DrugController implements Initializable {
     private boolean update = true;
     public DrugController() throws Exception {
     }
+    Window owner;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -224,14 +226,28 @@ public class DrugController implements Initializable {
 
 
     public void print(ActionEvent actionEvent) throws IOException {
-        try{
-            PrinterJob printerJob = PrinterJob.createPrinterJob();
-            printerJob.showPrintDialog(tableDataDrug.getScene().getWindow());
-            printerJob.printPage(tableDataDrug);
-            printerJob.endJob();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        Printer printer= Printer.getDefaultPrinter();
+        PageLayout pageLayout = printer.createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
 
+        PrinterJob printerJob = PrinterJob.createPrinterJob();
+
+        if (printerJob !=null) {
+            boolean showDialog = printerJob.showPrintDialog(owner);
+            if(showDialog){
+                tableDataDrug.setScaleX(0.60);
+                tableDataDrug.setScaleY(0.60);
+                tableDataDrug.setTranslateX(-200);
+                tableDataDrug.setTranslateY(-50);
+                boolean success = printerJob.printPage(pageLayout, tableDataDrug);
+                if(success){
+                    printerJob.endJob();
+                }
+                tableDataDrug.setTranslateX(0);
+                tableDataDrug.setTranslateY(0);
+                tableDataDrug.setScaleX(1.0);
+                tableDataDrug.setScaleY(1.0);
+
+            }
+        }
     }
 }
